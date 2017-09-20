@@ -3,7 +3,7 @@ defmodule KeyStreamTest do
   doctest KeyStream
   use Bitwise
 
-  test "generate" do
+  test "generate from binaries" do
     Enum.each([
       %{
         key: <<0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff>>,
@@ -30,7 +30,39 @@ defmodule KeyStreamTest do
         expected: <<0x48, 0xc3, 0x0c, 0xad>>
       }
     ], fn(%{key: key, iv: iv, length: length, expected: expected}) ->
-      stream = KeyStream.generate(key, iv, length)
+      stream = KeyStream.generate_binary(key, iv, length)
+      assert  stream == expected
+    end)
+  end
+
+  test "generate from hexa" do
+    Enum.each([
+      %{
+        key: "ffffffffffffffffffff",
+        iv: "00000856",
+        length: 4,
+        expected: "8de49731"
+      },
+      %{
+        key: "FFFFFFFFFFFFFFFFFFFF",
+        iv: "00000f9b",
+        length: 16,
+        expected: "07c84bb746272cdd866d5f30c54f1f04"
+      },
+      %{
+        key: "ffffffffffffffffffff",
+        iv: "00000f0e",
+        length: 16,
+        expected: "bf3f75d08c3c5d7d9f77db209c164884"
+      },
+      %{
+        key: "11223344556677889900",
+        iv: "0001ae33",
+        length: 4,
+        expected: "48c30cad"
+      }
+    ], fn(%{key: key, iv: iv, length: length, expected: expected}) ->
+      stream = KeyStream.generate_hex(key, iv, length)
       assert  stream == expected
     end)
   end
