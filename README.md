@@ -1,6 +1,6 @@
 # SelinkoMickeyEx
 
-**TODO: Add description**
+**Elixir implementation of stream cipher MICKEY-128**
 
 ## Installation
 
