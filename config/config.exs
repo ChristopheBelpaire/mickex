@@ -10,11 +10,11 @@ use Mix.Config
 
 # You can configure your application as:
 #
-#     config :selinko_mickey_ex, key: :value
+#     config :mickex, key: :value
 #
 # and access this configuration in your application as:
 #
-#     Application.get_env(:selinko_mickey_ex, :key)
+#     Application.get_env(:mickex, :key)
 #
 # You can also configure a 3rd-party app:
 #

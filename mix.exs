@@ -1,13 +1,16 @@
-defmodule SelinkoMickeyEx.Mixfile do
+defmodule Mickex.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :selinko_mickey_ex,
+      app: :mickex,
       version: "0.1.0",
       elixir: "~> 1.5",
-      start_permanent: Mix.env == :prod,
-      deps: deps()
+      start_permanent: Mix.env() == :prod,
+      deps: deps(),
+      description: description(),
+      package: package(),
+      source_url: "https://github.com/ChristopheBelpaire/mickex.git"
     ]
   end
 
@@ -21,8 +24,19 @@ defmodule SelinkoMickeyEx.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:ex_doc, "~> 0.22", only: :dev, runtime: false}
+    ]
+  end
+
+  defp description do
+    "Implementation of the mickey-128 crypto algorithm in elixir."
+  end
+
+  defp package() do
+    [
+      files: ~w(lib .formatter.exs mix.exs README*),
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/ChristopheBelpaire/mickex.git"}
     ]
   end
 end
